@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Quotes</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <label for="input-field">Quotes:</label>
+        <input type="text" id="input-field" name="input">
+        <br>
+        <span id="error-message" class="error"></span>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Data Input</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function validateForm() {
+            var input = document.getElementById('input-field').value;
+            var errorMessage = document.getElementById('error-message');
+
+            if (input.trim() === '') {
+                errorMessage.textContent = 'Please enter a quote.';
+                return false;
+            }
+
+            errorMessage.textContent = '';
+            addData(input);
+            document.getElementById('input-field').value = '';
+            return false;
+        }
+
+        function addData(input) {
+            var table = document.getElementById('data-table');
+            var row = table.insertRow(-1);
+            var cell = row.insertCell(0);
+            cell.innerHTML = input;
+        }
+    </script>
+</body>
+</html>
